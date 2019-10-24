@@ -1,0 +1,6 @@
+---
+# defaults file for wordpress
+wp_mysql_db: wordpress
+wp_mysql_user: admin_user
+wp_mysql_password: P#q3dJ/4
+wp_mysql_ip: 10.132.15.225

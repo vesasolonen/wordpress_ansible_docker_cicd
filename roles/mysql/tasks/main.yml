@@ -1,0 +1,35 @@
+---
+# tasks file for mysql
+
+- name: Get docker repos
+  command: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu (lsb_release -cs) stable" 
+  command: apt update
+
+- name: Install docker
+  apt: name={{ item }} state=latest
+  become: yes
+  with_items:
+    - docker.io
+    - python-docker
+
+#- name: config
+#  copy:
+#    src: database
+#    dest: /home/n5615/database
+
+- name: install database
+  docker_container:
+    name: database
+    image: mysql:5.7
+    ports: 
+     - "3306:3306"
+    state: started
+    restart: yes
+    env:
+        MYSQL_ROOT_PASSWORD: salaword
+        MYSQL_USER: admin_user
+        MYSQL_PASSWORD: P#q3dJ/4
+        MYSQL_DATABASE: database
+
+
+

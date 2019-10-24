@@ -1,0 +1,8 @@
+---
+# defaults file for mysql
+wp_mysql_db: wordpress
+wp_mysql_user: admin_user
+wp_mysql_password: P#q3dJ/4
+wp_mysql_priv: '*.*:ALL'
+wp_mysql_ip: '%'
+bind: 0.0.0.0

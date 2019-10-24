@@ -1,0 +1,40 @@
+---
+# tasks file for wordpress
+
+- name: Get docker repos
+  command: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu (lsb_release -cs) stable"
+  command: apt update
+
+- name: Install docker
+  apt: name={{ item }} state=latest
+  become: yes
+  with_items:
+    - docker.io
+    - python-docker
+
+- name: start docker service
+  sudo: yes
+  service:
+    name: docker
+    state: started
+
+- name: install wordpress
+  docker_container:
+    name: wordpress
+    image: wordpress
+    ports:
+     - "80:80"
+    state: started
+    restart: yes
+    env:
+        WORDPRESS_DB_NAME: database
+        WORDPRESS_DB_USER: admin_user
+        WORDPRESS_DB_PASSWORD: P#q3dJ/4
+        WORDPRESS_DB_HOST: 10.132.15.247
+
+
+
+
+#- name: execute dockerfile
+#  command: "docker run --name wordpress -p 80:80 -d -e DB_NAME=wordpress -e DB_USER=admin_user -e DB_PASSWORD=P#q3dJ/4 -e DB_HOST=34.77.109.156 wordpress"
+
